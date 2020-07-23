@@ -12,14 +12,13 @@ void toposort() {
 			cout << "impossible";
 			break;
 		}
-		int tmp = q.front();
-		cout << tmp << " ";
+		int now = q.front();
+		//cout << tmp << " ";
 		q.pop();
-		int s = adj[tmp].size();
-		for (int i = 0; i < s; i++) {
-			indegree[adj[tmp][i]]--;
-			if (indegree[adj[tmp][i]] == 0)
-				q.push(adj[tmp][i]);
+		for (int next:adj[now]) {
+			indegree[next]--;
+			if (indegree[next] == 0)
+				q.push(next);
 		}
 
 	}
