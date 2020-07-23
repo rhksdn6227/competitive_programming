@@ -47,5 +47,3 @@ int main(){
     }
     printf("%d\n", match);
 }
-[출처] 이분 매칭(Bipartite Matching)|작성자 라이
-
