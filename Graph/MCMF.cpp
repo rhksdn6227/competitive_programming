@@ -1,4 +1,4 @@
-#include <cstdio>
+#include <iostream>
 #include <vector>
 #include <queue>
 #include <algorithm>
@@ -20,20 +20,20 @@ int main(){
     scanf("%d %d", &N, &M);
     // 각 사람 정점과 싱크 정점 사이 간선 추가 (비용 0)
     for(int i=MAX_N; i<MAX_N+N; i++){
-        scanf("%d", &c[i][E]);
+        cin>>c[i][E];
         adj[E].push_back(i);
         adj[i].push_back(E);
     }
     // 소스 정점과 각 서점 정점 사이 간선 추가 (비용 0)
     for(int i=0; i<M; i++){
-        scanf("%d", &c[S][i]);
+        cin>>c[S][i];
         adj[S].push_back(i);
         adj[i].push_back(S);
     }
     // 서점과 사람 사이 간선 추가 (비용 C_ij)
     for(int i=0; i<M; i++){
         for(int j=MAX_N; j<MAX_N+N; j++){
-            scanf("%d", &d[i][j]);
+            cin>>d[i][j];
             d[j][i] = -d[i][j]; // 역방향 간선의 비용: 순방향의 -1배
             c[i][j] = INF; // 순방향 간선만 용량이 1 이상
             adj[i].push_back(j);
@@ -86,5 +86,5 @@ int main(){
         }
     }
     // 정답 출력
-    printf("%d\n", result);
+    cout<<result;
 }
