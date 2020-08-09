@@ -1,8 +1,8 @@
-class segtree {
-private:
+struct segtree {
+
 	int n, half;
 	vi item;
-public:
+
 	segtree(int rn) {
 		n = rn;
 		for (half = 1; half < n; half <<= 1);
