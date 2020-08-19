@@ -1,5 +1,5 @@
 vector<vi> scc;
-vector<int> adj[10001];
+vi adj[10001];
 int dfsn[10001];
 int finish[10001];
 int idx = 1;
