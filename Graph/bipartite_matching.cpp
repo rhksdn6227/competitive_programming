@@ -1,3 +1,5 @@
+#define MAX 1001
+
 // N: A 그룹 크기, M: B 그룹 크기
 // A[i], B[i]: 각 정점이 매칭된 반대편 정점 번호
 int N, M, A[MAX], B[MAX];
@@ -22,13 +24,13 @@ bool dfs(int a){
 }
  
 int main(){
-    scanf("%d %d", &N, &M);
+    cin >> N >> M;
     for(int i=0; i<N; i++){
         int S;
-        scanf("%d", &S);
+        cin >> S;
         for(int j=0; j<S; j++){
             int k;
-            scanf("%d", &k);
+            cin >> k;
             adj[i].push_back(k-1);
         }
     }
@@ -45,5 +47,5 @@ int main(){
             if(dfs(i)) match++;
         }
     }
-    printf("%d\n", match);
+    cout << match;
 }
