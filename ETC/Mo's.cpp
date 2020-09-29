@@ -1,3 +1,4 @@
+//시간복잡도: O((n+m)*sqrt(n))
 int n, m, rt;
 int arr[100001];
 int cnt[1000001];
