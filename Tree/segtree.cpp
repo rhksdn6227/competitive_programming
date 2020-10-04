@@ -1,14 +1,14 @@
+int n;
+int arr[100001];
+
 struct segtree {
 
-	int n, half;
+	int half;
 	vi item;
 
-	segtree(int rn) {
-		n = rn;
-		for (half = 1; half < n; half <<= 1);
-		item.resize(half * 2);
-	}
-	void init(vector<int>& arr) {
+	void init() {
+		for(half=1;half<n;half<<=1);
+		item.resize(half*2);
 		for (int i = 0; i < n; i++)
 			item[i + half] = arr[i];
 		for (int i = n; i < half; i++)
@@ -17,6 +17,7 @@ struct segtree {
 			item[i] = item[i * 2] + item[i * 2 + 1];
 	}
 	void update(int idx, int val) {
+		idx+=half;
 		item[idx] = val;
 		while (idx /= 2) {
 			item[idx] = item[idx * 2] + item[idx * 2 + 1];
