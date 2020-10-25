@@ -2,40 +2,44 @@
 #include <cstring>
 #include <vector>
 using namespace std;
-const int MAX = 1000000;
- 
-int main(){
-    char W[MAX+1], S[MAX+1];
-    int M, N;
-    gets(S);
-    gets(W);
-    N = strlen(S);
-    M = strlen(W);
- 
-    int fail[MAX] = {...};
- 
-    // S, W의 일치하는 지점을 result에 모음
-    vector<int> result;
-    for(int i=0, j=0; i<N; i++){
-        // 현재 글자가 불일치하면 fail 값을 계속 따라감
-        while(j > 0 && S[i] != W[j]) j = fail[j-1];
-        // 현재 글자가 일치
-        if(S[i] == W[j]){
-            // W를 S[i:i+M-1]에서 찾음
-            if(j == M-1){
-                // i=0부터 시작한다면 i-M+1. 문제 조건에 따라 1을 더함
-                result.push_back(i-M+2);
-                // 찾지 못한 것처럼 j를 이동시키면 됨
-                j = fail[j];
-            }
-            else j++;
-        }
-    }
- 
-    // 결과 출력
-    printf("%d\n", result.size());
-    for(int i: result)
-        printf("%d ", i);
-}
-[출처] KMP 알고리즘(Knuth–Morris–Pratt Algorithm) (수정: 2019-09-01)|작성자 라이
 
+string a, b;
+int failure[1000001]; //a[j]와 b[i]가 다를 때, failure[i-1]번째부터 a[j]와 다시 비교 시작
+vi ans;
+
+int main() {
+	/*#ifndef ONLINE_JUDGE
+	freopen("output.txt", "w", stdout);
+	#endif*/
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+
+	getline(cin, a);
+	getline(cin, b);
+	//실패함수 전처리
+	for (int i = 1, j = 0; i < b.length(); i++) { 
+		while (j > 0 && b[i] != b[j]) j = failure[j - 1];
+		if (b[i] == b[j]) failure[i] = ++j;
+	}
+
+	int idx = 0;
+	for (int i = 0; i < a.length(); i++) {
+		if (a[i] == b[idx]) {
+			if (idx == b.length() - 1) {
+				ans.push_back(i - b.length() + 2);
+				idx = failure[idx]; //중요!!
+			}
+			else
+				idx++;
+		}
+		else {
+			if (idx == 0)
+				continue;
+			idx = failure[idx - 1];
+			i--;
+		}
+	}
+	cout << ans.size() << "\n";
+	for (int a : ans)
+		cout << a << " ";
+}
